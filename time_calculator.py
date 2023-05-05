@@ -17,11 +17,13 @@ def add_time(start, duration,days=None):
     #hours
     newhour = int(hour)+int(addhour)
     if newhour >= (12-int(hour)): #AM/PM switch calc
-        print("Greater than 12 hours")
-        
-        if MM == "AM":
-            MM = "PM"
-        
+        switch = newhour//12%2
+        if switch == 1:
+            if MM == "AM":
+                MM == "PM"
+            else:
+                MM = "AM"
+       
     newhour = (newhour)%12
     
     
@@ -37,4 +39,4 @@ def add_time(start, duration,days=None):
     print("Days elapsed",days)
     return
 
-add_time("1:01 PM","11:59")
+add_time("1:01 PM","23:59")
