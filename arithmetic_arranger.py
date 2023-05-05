@@ -1,5 +1,5 @@
 def arithmetic_arranger(problems,req=False):#list of problems given, requests for the answer default False
-    if len(problems)>5:return print("Error: Too many problems.") #Error 1
+    if len(problems)>5:return "Error: Too many problems." #Error 1
 
     tops,bots,totals,dashes=[],[],[],[]
     
@@ -8,14 +8,14 @@ def arithmetic_arranger(problems,req=False):#list of problems given, requests fo
         top,sign,bot = problem.split()
 
         if sign not in "+-": #Error 2
-            return print("Error: Operator must be '+' or '-'.") 
+            return "Error: Operator must be '+' or '-'."
         try:
             if sign == "+":
                 total = int(top)+int(bot)
             else:
                 total = int(top)-int(bot)
         except:
-            return print("Error: Numbers must only contain digits.") #Error 3
+            return "Error: Numbers must only contain digits." #Error 3
         if len(top)>4 or len(bot)>4: return print("Error: Numbers cannot be more than four digits.") #Error 4
 
         #format spacing
@@ -33,8 +33,8 @@ def arithmetic_arranger(problems,req=False):#list of problems given, requests fo
 
     #answer check    
     if req == True:
-        return print(f"{'    '.join(tops)}\n{'    '.join(bots)}\n{'    '.join(dashes)}\n{'    '.join(totals)}")
+        return f"{'    '.join(tops)}\n{'    '.join(bots)}\n{'    '.join(dashes)}\n{'    '.join(totals)}"
     else:
-        return print(f"{'    '.join(tops)}\n{'    '.join(bots)}\n{'    '.join(dashes)}")
+        return f"{'    '.join(tops)}\n{'    '.join(bots)}\n{'    '.join(dashes)}"
 
 arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"],True)
