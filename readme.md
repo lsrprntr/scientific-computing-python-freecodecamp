@@ -2,6 +2,8 @@
 <img alt="Image Alt Text" src="/image/scientific_computing.png">
 </a>
 <!-- HTML this HTML that -->
+
+
 [freeCodeCamp Cert link](https://www.freecodecamp.org/learn/scientific-computing-with-python/#scientific-computing-with-python-projects)
 
 ## Projects from the freeCodeCamp below
