@@ -6,12 +6,19 @@ def add_time(start, duration,day=None):
     hour,min = time.split(":")
     addhour,addmin = duration.split(":")
 
-    #new time calc
-    newhour = (int(hour)+int(addhour))%12
-    newmin = (int(min)+int(addmin))%60
-
+    #mins
+    newmin = int(min)+int(addmin)
+    if newmin >=60:
+        hour = int(hour)+1
+    newmin = (newmin)%60
+    
+    #hours
+    newhour = int(hour)+int(addhour)
+    if newhour >=12:
+        days = 1
+    newhour = (newhour)%12
+    
     print(newhour)
-
     print(newmin)
 
     #AM/PM calc
@@ -19,7 +26,7 @@ def add_time(start, duration,day=None):
         print("switch ampm")
     
     #format
-    
+
     return
 
-add_time("2:20 PM","2:40")
+add_time("12:20 PM","2:40")
