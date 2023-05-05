@@ -21,12 +21,14 @@ def add_time(start, duration,days=None):
     newhour = int(hour)+int(addhour)
     if newhour >= (12-int(hour)): #AM/PM switch and days elapsed calc
         dayadd = (newhour + (12 if MM == "PM" else 0))//24
+        print(newhour//12%2)
         switch = newhour//12%2
         if switch == 1:
             if MM == "AM":
-                MM == "PM"
+                MM = "PM"
             else:
-                MM = "AM"
+                MM = "PM"
+
     newhour = (newhour)%12
     if newhour == 0:
         newhour = "12"
@@ -49,7 +51,3 @@ def add_time(start, duration,days=None):
     if dayadd == 0:
         return print(f"{newhour}:{newmin} {MM}")
     return print(f"{newhour}:{newmin} {MM} {dayadd}")
-
-    
-
-add_time("11:55 AM","3:12","saturday")
