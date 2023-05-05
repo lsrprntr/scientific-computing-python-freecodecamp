@@ -2,12 +2,11 @@
 #No imports allowed for this exercise
 
 def add_time(start, duration,day=None):
-    hours = [1,2,3,4,5,6,7,8,9,10,11,12]
     time,MM = start.split()
     hour,min = time.split(":")
-    
     addhour,addmin = duration.split(":")
 
+    #new time calc
     newhour = (int(hour)+int(addhour))%12
     newmin = (int(min)+int(addmin))%60
 
@@ -15,9 +14,11 @@ def add_time(start, duration,day=None):
 
     print(newmin)
 
+    #AM/PM calc
     if int(addhour)//12%2==0:
         print("switch ampm")
     
+    #format
     
     return
 
