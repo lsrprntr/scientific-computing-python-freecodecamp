@@ -3,14 +3,12 @@
 
 def add_time(start, duration,day=None):
     hours = [1,2,3,4,5,6,7,8,9,10,11,12]
-    start.split(":")
+    hour,min = start.split(":")
+    min,MM = min.split()
     
     print(hours[16%12])
     
     
-
-
-
     return
 
 add_time("10:20 PM","23:22")
