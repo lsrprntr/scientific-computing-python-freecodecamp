@@ -1,6 +1,6 @@
 # Scientific Computing with Python Certification
 
-![cert image from freeCodeCamp](scientific computing.png)
+![cert image from freeCodeCamp](/image/scientific computing.png)
 
 [freeCodeCamp Cert link](https://www.freecodecamp.org/learn/scientific-computing-with-python/#scientific-computing-with-python-projects)
 ## Projects from the freeCodeCamp below
