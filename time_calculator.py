@@ -21,13 +21,12 @@ def add_time(start, duration,days=None):
     newhour = int(hour)+int(addhour)
     if newhour >= (12-int(hour)): #AM/PM switch and days elapsed calc
         dayadd = (newhour + (12 if MM == "PM" else 0))//24
-        print(newhour//12%2)
         switch = newhour//12%2
         if switch == 1:
             if MM == "AM":
                 MM = "PM"
             else:
-                MM = "PM"
+                MM = "AM"
 
     newhour = (newhour)%12
     if newhour == 0:
@@ -38,16 +37,18 @@ def add_time(start, duration,days=None):
         week = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         day = week[(week.index(days.title())+dayadd)%7]
     
+    #days added text
     if dayadd == 1:
         dayadd = "(next day)"
     elif dayadd >=1:
         dayadd = f"({dayadd} days later)"
 
+    #return format
     if days != None:
         if dayadd == 0:
-            return print(f"{newhour}:{newmin} {MM}, {day}")
-        return print(f"{newhour}:{newmin} {MM}, {day} {dayadd}")
+            return f"{newhour}:{newmin} {MM}, {day}"
+        return f"{newhour}:{newmin} {MM}, {day} {dayadd}"
 
     if dayadd == 0:
-        return print(f"{newhour}:{newmin} {MM}")
-    return print(f"{newhour}:{newmin} {MM} {dayadd}")
+        return f"{newhour}:{newmin} {MM}"
+    return f"{newhour}:{newmin} {MM} {dayadd}"
