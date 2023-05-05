@@ -24,11 +24,14 @@ def arithmetic_arranger(problems,req=False):#list of problems given, requests fo
         bot = sign+str(bot).rjust(space-1)
         total = str(total).rjust(space)
         dash = "-"*space
+
         #add to lists
         tops.append(top)
         bots.append(bot)
         totals.append(total)
         dashes.append(dash)
+
+    #answer check    
     if req == True:
         return print(f"{'    '.join(tops)}\n{'    '.join(bots)}\n{'    '.join(dashes)}\n{'    '.join(totals)}")
     else:
