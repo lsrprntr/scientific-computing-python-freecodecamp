@@ -1,5 +1,3 @@
-# Scientific Computing with Python Certification
-
 <a href="https://www.freecodecamp.org/learn/scientific-computing-with-python/">
 <img alt="Image Alt Text" src="/image/scientific_computing.png">
 </a>
