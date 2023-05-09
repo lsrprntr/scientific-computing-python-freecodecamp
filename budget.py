@@ -54,8 +54,12 @@ class Category:
 
 
 def create_spend_chart(categories: list[str]):
+    cats = list()
     for item in categories:
-        print("y")
+        names = item.name
+        cost = item.get_balance()
+        cats.append((names,cost))
+    print(cats)
     return
 
 
@@ -65,4 +69,5 @@ eg.deposit(100, "twentythreeletternamee")
 eg.withdraw(100)
 eg.transfer(10, eg)
 eg.withdraw(99999, "big amount")
-print(eg, "print statement")
+
+create_spend_chart([eg,eg])
