@@ -17,7 +17,8 @@ class Category:
             lines.append(line)
         title = self.name.center(30,"*")+"\n"
         body = '\n'.join(lines)
-        return f"{title}{body}"
+        total = format(self.get_balance(),".2f")
+        return f"{title}{body}\nTotal: {total}"
 
     def deposit(self, amount, description=""):
         self.ledger.append(amount)
@@ -60,6 +61,7 @@ def create_spend_chart(categories: list[str]):
         cost = item.get_balance()
         cats.append((names,cost))
     print(cats)
+    
     return
 
 
@@ -69,5 +71,5 @@ eg.deposit(100, "twentythreeletternamee")
 eg.withdraw(100)
 eg.transfer(10, eg)
 eg.withdraw(99999, "big amount")
-
+print(eg)
 create_spend_chart([eg,eg])
