@@ -10,9 +10,11 @@ class Category:
         return 
 
     def __repr__(self):
-        print(self.ledger)
-        print(self.items)
-        return "repr"
+        for i,item in enumerate(self.items):
+            self.ledger[i]
+            len(item[0:23])
+        title = self.name.center(30,"*")
+        return f"{title}"
 
     def deposit(self, amount, description=""):
         self.ledger.append(amount)
