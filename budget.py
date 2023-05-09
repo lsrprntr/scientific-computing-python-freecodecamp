@@ -65,7 +65,7 @@ def create_spend_chart(categories: list[str]):
         ptotal += costs
         padding = max(len(names),padding)
     for i,(name,cost) in enumerate(cats):
-        cats[i] = (name.rjust(padding),cost/ptotal*100//1)        
+        cats[i] = (name.ljust(padding),cost/ptotal*100//1)        
     title = "Percentage spent by category"
     graph = ["100| ",
             " 90| ",
@@ -79,14 +79,19 @@ def create_spend_chart(categories: list[str]):
             " 10| ",      
             "  0| "]
     xline = "    -"+"---"*len(categories)
-    body = ""
+    body = "     "
     for (name,cost) in cats:
         for index, plot in enumerate(graph):
             if cost >= int(plot[:3]):
                 graph[index]+= "o  "
             else:
                 graph[index]+= "   "
-    
+    for index in range(padding):
+        for (name,cost) in cats:
+            body += name[index]+"  "
+        body += "\n"
+
+    print(body)
     print(title+"\n"+'\n'.join(graph)+"\n"+xline)
     print(cats)
 
