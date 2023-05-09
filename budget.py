@@ -6,30 +6,28 @@ class Category:
     def __init__(self, name):
         self.name = name
         self.ledger = list()
-        self.items = list()
-        return 
-
-    def __repr__(self):
-        #print(self.ledger)
-        line = list()
-        for i,item in enumerate(self.items):
-            print(self.ledger[i])
-            print(item[0:23])
-            number = format(self.ledger[i],".2f")
-            print(len(f"{number}"))
-            len(item[0:23])
-        title = self.name.center(30,"*")
-        return f"{title}"
+        self.receipts = list()
+         
+    def __str__(self):
+        lines = list()
+        for i,item in enumerate(self.receipts):
+            number = format(self.ledger[i],".2f") 
+            space = 30-len(item[0:23])-len(f"{number}")
+            line = f"{item[0:23]}{' '*space}{number}"
+            lines.append(line)
+        title = self.name.center(30,"*")+"\n"
+        body = '\n'.join(lines)
+        return f"{title}{body}"
 
     def deposit(self, amount, description=""):
         self.ledger.append(amount)
-        self.items.append(description)
-        return
+        self.receipts.append(description)
+        
 
     def withdraw(self, amount, description=""):
         if self.check_funds(amount):
             self.ledger.append(-amount)
-            self.items.append(description)
+            self.receipts.append(description)
             return True
         else:
             return False
@@ -40,9 +38,9 @@ class Category:
     def transfer(self, amount, other):
         if self.check_funds(amount):
             self.ledger.append(-amount)
-            self.items.append(f"Transfer to {other}")
+            self.receipts.append(f"Transfer to {other.name}")
             other.ledger.append(amount)
-            other.items.append(f"Transfer from {other}")
+            other.receipts.append(f"Transfer from {other.name}")
             return True
         else:
             return False
@@ -62,9 +60,10 @@ def create_spend_chart(categories: list[str]):
 
 
 eg = Category("examplename")
-eg.deposit(100, "12345678901234567890")
-eg.deposit(100, "1234567890123456789012345")
+eg.deposit(100, "twentyletternameeee")
+eg.deposit(100, "twentythreeletternamee")
 eg.withdraw(100)
 eg.transfer(10, eg)
 eg.withdraw(99999, "big amount")
 print(eg, "print statement")
+print(eg.receipts)
