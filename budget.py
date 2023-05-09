@@ -10,8 +10,13 @@ class Category:
         return 
 
     def __repr__(self):
+        #print(self.ledger)
+        line = list()
         for i,item in enumerate(self.items):
-            self.ledger[i]
+            print(self.ledger[i])
+            print(item[0:23])
+            number = format(self.ledger[i],".2f")
+            print(len(f"{number}"))
             len(item[0:23])
         title = self.name.center(30,"*")
         return f"{title}"
@@ -53,13 +58,13 @@ class Category:
 def create_spend_chart(categories: list[str]):
     for item in categories:
         print(item.get_balance())
-        print("balance ^^^")
     return
 
 
 eg = Category("examplename")
-eg.deposit(100, "Pizza")
+eg.deposit(100, "12345678901234567890")
+eg.deposit(100, "1234567890123456789012345")
 eg.withdraw(100)
 eg.transfer(10, eg)
-eg.withdraw(99999)
+eg.withdraw(99999, "big amount")
 print(eg, "print statement")
