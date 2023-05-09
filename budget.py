@@ -7,18 +7,19 @@ class Category:
         self.name = name
         self.ledger = list()
         self.items = list()
-        return
+        return 
+
+    def __repr__(self):
+        print(self.ledger)
+        print(self.items)
+        return "repr"
 
     def deposit(self, amount, description=""):
-        self.amount = amount
-        self.description = description
         self.ledger.append(amount)
         self.items.append(description)
         return
 
     def withdraw(self, amount, description=""):
-        self.amount = amount
-        self.description = description
         if self.check_funds(amount):
             self.ledger.append(-amount)
             self.items.append(description)
@@ -27,30 +28,36 @@ class Category:
             return False
 
     def get_balance(self):
-        print("THIS IS HOW MUCH BALANCE",sum(self.ledger))
         return sum(self.ledger)
 
-    def transfer(self, amount, name):
-        self.amount = 1
-        name.amount = 2
-        return
+    def transfer(self, amount, other):
+        if self.check_funds(amount):
+            self.ledger.append(-amount)
+            self.items.append(f"Transfer to {other}")
+            other.ledger.append(amount)
+            other.items.append(f"Transfer from {other}")
+            return True
+        else:
+            return False
 
     def check_funds(self, amount):
         check = self.get_balance()
-        if check != 0:
-            print("No moneys")
-            return False
-        else:
+        if amount <= check:
             return True
+        else:
+            return False
 
 
 def create_spend_chart(categories: list[str]):
     for item in categories:
-        item.get_balance()
+        print(item.get_balance())
         print("balance ^^^")
     return
 
 
-damn = Category("damn")
-damn.deposit(10, "Pizza")
-damn.get_balance()
+eg = Category("examplename")
+eg.deposit(100, "Pizza")
+eg.withdraw(100)
+eg.transfer(10, eg)
+eg.withdraw(99999)
+print(eg, "print statement")
