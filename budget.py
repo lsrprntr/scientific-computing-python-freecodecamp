@@ -55,13 +55,40 @@ class Category:
 
 
 def create_spend_chart(categories: list[str]):
+    ptotal = 0
     cats = list()
+    padding = 0
     for item in categories:
         names = item.name
-        cost = item.get_balance()
-        cats.append((names,cost))
+        costs = item.get_balance()
+        cats.append((names,costs))
+        ptotal += costs
+        padding = max(len(names),padding)
+    for i,(name,cost) in enumerate(cats):
+        cats[i] = (name.rjust(padding),cost/ptotal*100//1)        
+    title = "Percentage spent by category"
+    graph = ["100| ",
+            " 90| ",
+            " 80| ",
+            " 70| ",
+            " 60| ",
+            " 50| ",
+            " 40| ",
+            " 30| ",
+            " 20| ",
+            " 10| ",      
+            "  0| "]
+    xline = "    -"+"---"*len(categories)
+    body = ""
+    for (name,cost) in cats:
+        for index, plot in enumerate(graph):
+            if cost >= int(plot[:3]):
+                graph[index]+= "o  "
+            else:
+                graph[index]+= "   "
+    print(title+"\n"+'\n'.join(graph)+"\n"+xline)
     print(cats)
-    
+
     return
 
 
@@ -69,7 +96,12 @@ eg = Category("examplename")
 eg.deposit(100, "twentyletternameeee")
 eg.deposit(100, "twentythreeletternamee")
 eg.withdraw(100)
-eg.transfer(10, eg)
+eg.transfer(10, eg2)
 eg.withdraw(99999, "big amount")
+eg2 = Category("examplename2")
+eg2.deposit(100, "twentyletternameeee")
+eg2.deposit(100, "twentythreeletternamee")
+eg2.withdraw(100)
+eg2.withdraw(99999, "big amount")
 print(eg)
 create_spend_chart([eg,eg])
