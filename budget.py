@@ -55,7 +55,7 @@ class Category:
 
 def create_spend_chart(categories: list[str]):
     for item in categories:
-        print(item.get_balance())
+        print("y")
     return
 
 
@@ -66,4 +66,3 @@ eg.withdraw(100)
 eg.transfer(10, eg)
 eg.withdraw(99999, "big amount")
 print(eg, "print statement")
-print(eg.receipts)
