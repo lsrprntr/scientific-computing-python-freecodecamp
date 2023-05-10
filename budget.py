@@ -89,26 +89,10 @@ def create_spend_chart(categories: list[str]):
     for index in range(padding):
         for (name,cost) in cats:
             body += name[index]+"  "
-        body += "\n"
+        body += "\n     "
 
-    print(body)
-    print(title+"\n"+'\n'.join(graph)+"\n"+xline)
-    print(cats)
-
-    return
+    
+    #print(title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body)
+    return title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body
 
 
-eg = Category("examplename")
-eg2 = Category("examplename222")
-eg.deposit(100, "twentyletternameeee")
-eg.deposit(100, "twentythreeletternamee")
-eg.withdraw(100)
-eg.transfer(10, eg2)
-eg.withdraw(99999, "big amount")
-
-eg2.deposit(100, "twentyletternameeee")
-eg2.deposit(100, "twentythreeletternamee")
-eg2.withdraw(100)
-eg2.withdraw(99999, "big amount")
-print(eg)
-create_spend_chart([eg,eg2])
