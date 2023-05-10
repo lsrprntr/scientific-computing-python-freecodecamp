@@ -6,14 +6,13 @@ class Category:
     def __init__(self, name):
         self.name = name
         self.ledger = list() #{"amount": amount, "description": description}
-        self.receipts = list()
-         
-    def __str__(self):
+        
+    def __str__(self): #outputs ledger formatted
         lines = list()
-        for i,item in enumerate(self.receipts):
-            number = format(self.ledger[i],".2f") 
-            space = 30-len(item[0:23])-len(f"{number}")
-            line = f"{item[0:23]}{' '*space}{number}"
+        for object in self.ledger:
+            number = format(object["amount"],".2f")
+            space = 30 - len((object["description"][0:23])) - len(f"{number}")
+            line = f"{object['description'][0:23]}{' '*space}{number}"
             lines.append(line)
         title = self.name.center(30,"*")+"\n"
         body = '\n'.join(lines)
@@ -21,27 +20,23 @@ class Category:
         return f"{title}{body}\nTotal: {total}"
 
     def deposit(self, amount, description=""):
-        self.ledger.append(amount)
-        self.receipts.append(description)
+        self.ledger.append({"amount": amount, "description": description})
         
 
     def withdraw(self, amount, description=""):
         if self.check_funds(amount):
-            self.ledger.append(-amount)
-            self.receipts.append(description)
+            self.ledger.append({"amount": -amount, "description": description})
             return True
         else:
             return False
 
     def get_balance(self):
-        return sum(self.ledger)
+        return sum((object["amount"] for object in self.ledger))
 
     def transfer(self, amount, other):
         if self.check_funds(amount):
-            self.ledger.append(-amount)
-            self.receipts.append(f"Transfer to {other.name}")
-            other.ledger.append(amount)
-            other.receipts.append(f"Transfer from {other.name}")
+            self.ledger.append({"amount": -amount, "description": f"Transfer to {other.name}"})
+            other.ledger.append({"amount": amount, "description": f"Transfer from {self.name}"})
             return True
         else:
             return False
@@ -54,7 +49,7 @@ class Category:
             return False
 
 
-def create_spend_chart(categories: list[str]):
+def create_spend_chart(categories):
     ptotal = 0
     cats = list()
     padding = 0
@@ -64,6 +59,7 @@ def create_spend_chart(categories: list[str]):
         cats.append((names,costs))
         ptotal += costs
         padding = max(len(names),padding)
+
     for i,(name,cost) in enumerate(cats):
         cats[i] = (name.ljust(padding),cost/ptotal*100//1)        
     title = "Percentage spent by category"
@@ -90,26 +86,26 @@ def create_spend_chart(categories: list[str]):
         for (name,cost) in cats:
             body += name[index]+"  "
         body += "\n     "
+    body = body[:-6]
 
     
     #print(title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body)
     return title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body
 
-eg = Category("examplename")
-eg2 = Category("examplename222")
-eg3 = Category("food")
-eg.deposit(100, "twentyletternameeee")
-eg.deposit(100, "twentythreeletternamee")
-eg.withdraw(100)
-eg.transfer(10, eg2)
-eg.withdraw(99999, "big amount")
+"""
+#Test case
+food = Category("Food")
+business = Category("Business")
+entertainment = Category("Entertainment")
+food.deposit(900,"deposit")
+business.deposit(900,"deposit")
+entertainment.deposit(900,"deposit")
+food.withdraw(105.55)
+entertainment.withdraw(33.40)
+business.withdraw(10.99)
 
-eg2.deposit(100, "twentyletternameeee")
-eg2.deposit(100, "twentythreeletternamee")
-eg2.withdraw(100)
-eg2.withdraw(99999, "big amount")
-
-eg3.deposit(900)
-eg3.withdraw(45.67)
-print(eg3)
-create_spend_chart([eg,eg2,eg3])
+create_spend_chart([business, food, entertainment])
+print(business)
+print(food)
+print(entertainment)
+"""
