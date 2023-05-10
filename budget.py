@@ -6,8 +6,7 @@ class Category:
     def __init__(self, name):
         self.name = name
         self.ledger = list() #{"amount": amount, "description": description}
-        self.receipts = list() #to delete
-         
+        
     def __str__(self):
         lines = list()
         for object in self.ledger:
@@ -27,6 +26,7 @@ class Category:
     def withdraw(self, amount, description=""):
         if self.check_funds(amount):
             self.ledger.append({"amount": -amount, "description": description})
+            return True
         else:
             return False
 
@@ -35,10 +35,8 @@ class Category:
 
     def transfer(self, amount, other):
         if self.check_funds(amount):
-            self.ledger.append(-amount)
-            self.receipts.append(f"Transfer to {other.name}")
-            other.ledger.append(amount)
-            other.receipts.append(f"Transfer from {other.name}")
+            self.ledger.append({"amount": -amount, "description": f"Transfer to {other.name}"})
+            other.ledger.append({"amount": amount, "description": f"Transfer from {self.name}"})
             return True
         else:
             return False
@@ -51,7 +49,7 @@ class Category:
             return False
 
 
-def create_spend_chart(categories: list[str]):
+def create_spend_chart(categories):
     ptotal = 0
     cats = list()
     padding = 0
@@ -61,6 +59,7 @@ def create_spend_chart(categories: list[str]):
         cats.append((names,costs))
         ptotal += costs
         padding = max(len(names),padding)
+
     for i,(name,cost) in enumerate(cats):
         cats[i] = (name.ljust(padding),cost/ptotal*100//1)        
     title = "Percentage spent by category"
@@ -87,34 +86,26 @@ def create_spend_chart(categories: list[str]):
         for (name,cost) in cats:
             body += name[index]+"  "
         body += "\n     "
+    body = body[:-6]
 
     
     #print(title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body)
     return title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body
 
-eg = Category("examplename")
-eg2 = Category("examplename222")
-eg3 = Category("food")
-eg.deposit(100, "twentyletternameeee")
-eg.deposit(100, "twentythreeletternamee")
-eg.deposit(100, "twentythreeletternamee")
-eg.deposit(100, "twentythreeletternamee")
-eg.get_balance()
-print(eg)
+"""
+#Test case
+food = Category("Food")
+business = Category("Business")
+entertainment = Category("Entertainment")
+food.deposit(900,"deposit")
+business.deposit(900,"deposit")
+entertainment.deposit(900,"deposit")
+food.withdraw(105.55)
+entertainment.withdraw(33.40)
+business.withdraw(10.99)
 
-
-'''
-eg.withdraw(100)
-eg.transfer(10, eg2)
-eg.withdraw(99999, "big amount")
-
-eg2.deposit(100, "twentyletternameeee")
-eg2.deposit(100, "twentythreeletternamee")
-eg2.withdraw(100)
-eg2.withdraw(99999, "big amount")
-
-eg3.deposit(900)
-eg3.withdraw(45.67)
-print(eg3)
-create_spend_chart([eg,eg2,eg3])
-'''
+create_spend_chart([business, food, entertainment])
+print(business)
+print(food)
+print(entertainment)
+"""
