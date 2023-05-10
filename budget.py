@@ -7,7 +7,7 @@ class Category:
         self.name = name
         self.ledger = list() #{"amount": amount, "description": description}
         
-    def __str__(self):
+    def __str__(self): #outputs ledger formatted
         lines = list()
         for object in self.ledger:
             number = format(object["amount"],".2f")
