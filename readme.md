@@ -10,7 +10,7 @@
 - Arithmetic Formatter [replit alt link](https://replit.com/@lsrprntr/boilerplate-arithmetic-formatter#arithmetic_arranger.py)
 - Time Calculator [replit alt link](https://replit.com/@lsrprntr/boilerplate-time-calculator#time_calculator.py)
 - Budget App [replit alt link](https://replit.com/@lsrprntr/boilerplate-budget-app#budget.py)
-- Polygon Area Calculator
+- Polygon Area Calculator [replit alt link](https://replit.com/@lsrprntr/boilerplate-polygon-area-calculator#shape_calculator.py)
 - Probability Calculator 
 
 ### Comments
