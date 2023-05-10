@@ -10,10 +10,10 @@ class Category:
          
     def __str__(self):
         lines = list()
-        for i,item in enumerate(self.receipts):
-            number = format(self.ledger[i],".2f") 
-            space = 30-len(item[0:23])-len(f"{number}")
-            line = f"{item[0:23]}{' '*space}{number}"
+        for object in self.ledger:
+            number = format(object["amount"],".2f")
+            space = 30 - len((object["description"][0:23])) - len(f"{number}")
+            line = f"{object['description'][0:23]}{' '*space}{number}"
             lines.append(line)
         title = self.name.center(30,"*")+"\n"
         body = '\n'.join(lines)
@@ -26,16 +26,12 @@ class Category:
 
     def withdraw(self, amount, description=""):
         if self.check_funds(amount):
-            self.ledger.append(-amount)
-            self.receipts.append(description)
-            return True
+            self.ledger.append({"amount": -amount, "description": description})
         else:
             return False
 
     def get_balance(self):
-        for i in self.ledger:
-            print(i)
-        return sum(self.ledger)
+        return sum((object["amount"] for object in self.ledger))
 
     def transfer(self, amount, other):
         if self.check_funds(amount):
@@ -103,7 +99,10 @@ eg.deposit(100, "twentyletternameeee")
 eg.deposit(100, "twentythreeletternamee")
 eg.deposit(100, "twentythreeletternamee")
 eg.deposit(100, "twentythreeletternamee")
-eg.get_balance
+eg.get_balance()
+print(eg)
+
+
 '''
 eg.withdraw(100)
 eg.transfer(10, eg2)
