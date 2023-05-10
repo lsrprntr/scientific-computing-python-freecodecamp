@@ -5,7 +5,7 @@ class Category:
 
     def __init__(self, name):
         self.name = name
-        self.ledger = list()
+        self.ledger = list() #{"amount": amount, "description": description}
         self.receipts = list()
          
     def __str__(self):
@@ -94,3 +94,22 @@ def create_spend_chart(categories: list[str]):
     
     #print(title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body)
     return title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body
+
+eg = Category("examplename")
+eg2 = Category("examplename222")
+eg3 = Category("food")
+eg.deposit(100, "twentyletternameeee")
+eg.deposit(100, "twentythreeletternamee")
+eg.withdraw(100)
+eg.transfer(10, eg2)
+eg.withdraw(99999, "big amount")
+
+eg2.deposit(100, "twentyletternameeee")
+eg2.deposit(100, "twentythreeletternamee")
+eg2.withdraw(100)
+eg2.withdraw(99999, "big amount")
+
+eg3.deposit(900)
+eg3.withdraw(45.67)
+print(eg3)
+create_spend_chart([eg,eg2,eg3])
