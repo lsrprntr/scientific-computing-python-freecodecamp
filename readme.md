@@ -9,7 +9,7 @@
 ## Projects from the freeCodeCamp below
 - Arithmetic Formatter [replit alt link](https://replit.com/@lsrprntr/boilerplate-arithmetic-formatter#arithmetic_arranger.py)
 - Time Calculator [replit alt link](https://replit.com/@lsrprntr/boilerplate-time-calculator#time_calculator.py)
-- Budget App
+- Budget App [replit alt link](https://replit.com/@lsrprntr/boilerplate-budget-app#budget.py)
 - Polygon Area Calculator
 - Probability Calculator 
 
