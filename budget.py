@@ -6,7 +6,7 @@ class Category:
     def __init__(self, name):
         self.name = name
         self.ledger = list() #{"amount": amount, "description": description}
-        self.receipts = list()
+        self.receipts = list() #to delete
          
     def __str__(self):
         lines = list()
@@ -21,8 +21,7 @@ class Category:
         return f"{title}{body}\nTotal: {total}"
 
     def deposit(self, amount, description=""):
-        self.ledger.append(amount)
-        self.receipts.append(description)
+        self.ledger.append({"amount": amount, "description": description})
         
 
     def withdraw(self, amount, description=""):
@@ -34,6 +33,8 @@ class Category:
             return False
 
     def get_balance(self):
+        for i in self.ledger:
+            print(i)
         return sum(self.ledger)
 
     def transfer(self, amount, other):
@@ -100,6 +101,10 @@ eg2 = Category("examplename222")
 eg3 = Category("food")
 eg.deposit(100, "twentyletternameeee")
 eg.deposit(100, "twentythreeletternamee")
+eg.deposit(100, "twentythreeletternamee")
+eg.deposit(100, "twentythreeletternamee")
+eg.get_balance
+'''
 eg.withdraw(100)
 eg.transfer(10, eg2)
 eg.withdraw(99999, "big amount")
@@ -113,3 +118,4 @@ eg3.deposit(900)
 eg3.withdraw(45.67)
 print(eg3)
 create_spend_chart([eg,eg2,eg3])
+'''
