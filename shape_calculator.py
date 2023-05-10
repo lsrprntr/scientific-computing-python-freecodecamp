@@ -55,9 +55,13 @@ rect.get_picture()
 
 sq = Square(2)
 print(sq.get_picture())
-sq.set_width(4)
+sq.set_width(4) 
+print(type(sq))
 print(sq.get_picture())
 
 rect.get_amount_inside(sq)
 
+The replit test cases do not test when a square class is created then using a rectangle class method to change the width.
+You could easily make more methods to keep the square a square but it isn't required in this exercise.
 '''
+
