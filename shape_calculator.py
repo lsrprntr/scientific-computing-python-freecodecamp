@@ -1,7 +1,7 @@
 #https://www.freecodecamp.org/learn/scientific-computing-with-python/scientific-computing-with-python-projects/polygon-area-calculator
 
 class Rectangle():
-    def __init__(self, width=0, height=0):
+    def __init__(self, width, height):
         self.width = width
         self.height = height
 
@@ -23,29 +23,41 @@ class Rectangle():
     def get_picture(self): 
         if self.width>50 or self.height>50:
             return "Too big for picture."
-        
-        return "*" 
-                                                                                                                                                                                                                                   
-    def get_amount_inside(self,object): 
-        return False
+        return '\n'.join(["*"*self.width for w in range(1,self.height+1)])+"\n"
+                         
+    def get_amount_inside(self, object):
+        times = self.get_area() // object.get_area()
+        print(times)
+        if times < 1:
+            return False
+        return times
     
     def __str__(self):
-        return f"Width={self.width},Height={self.height}"
-
-
+        return f"Rectangle(width={self.width}, height={self.height})"
 
 class Square(Rectangle):
     def __init__(self,side):
-        self.side = side
         self.height = side
         self.width = side
         
     def set_side(self,side):
         self.width = side
         self.height = side
-        
+    
+    def __str__(self):
+        return f"Square(side={self.width})"
+                
 #test cases
-
-rect = Rectangle(10, 5)
+'''
+rect = Rectangle(10, 15)
 print(rect.get_area())
+rect.get_picture()
 
+sq = Square(2)
+print(sq.get_picture())
+sq.set_width(4)
+print(sq.get_picture())
+
+rect.get_amount_inside(sq)
+
+'''
