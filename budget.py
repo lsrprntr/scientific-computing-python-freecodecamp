@@ -94,5 +94,3 @@ def create_spend_chart(categories: list[str]):
     
     #print(title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body)
     return title+"\n"+'\n'.join(graph)+"\n"+xline+"\n"+body
-
-
