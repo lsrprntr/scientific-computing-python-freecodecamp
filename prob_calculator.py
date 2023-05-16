@@ -1,4 +1,4 @@
-import copy
+#import copy
 import random
 from collections import Counter
 
@@ -7,22 +7,18 @@ class Hat:
         self.contents = []
         self.total = 0
         self.drawn = []
-
         for key,value in kwargs.items():
             self.total += value
             for i in range(1,value+1):
                 self.contents.append(key)
-
         self.original = list(self.contents) #copy
         self.oritotal = int(self.total) #copy
 
-    def draw(self,to_draw = 1):
-
-        if self.total == 0: #returns to original bag contents
+    def draw(self,to_draw = 1): #reoccuring draw loop
+        if self.total == 0: #returns to original bag contents and draws one
             self.reset()
             self.draw()
             return self.drawn
-            
         else:
             r = random.randint(0,self.total-1)
             ball = self.contents[r]
@@ -36,8 +32,6 @@ class Hat:
     def reset(self):
         self.contents = list(self.original)
         self.total = self.oritotal
-        
-
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
@@ -52,19 +46,14 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
         for i in range(0,num_balls_drawn):
             hat.draw()
         d = Counter(hat.drawn)
-
         for key in expected_balls:
-
             if d[key] >= expected_balls[key]:
                 success = 1
             else:
                 success = 0
                 break
-        
-
         if success == 1:
             successes += 1
-
         hat.reset()
 
     prob = successes/n
