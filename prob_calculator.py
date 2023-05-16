@@ -16,49 +16,65 @@ class Hat:
         self.original = list(self.contents) #copy
         self.oritotal = int(self.total) #copy
 
-    def draw(self):
+    def draw(self,to_draw = 1):
+
         if self.total == 0: #returns to original bag contents
-            self.contents = list(self.original) #copy
-            self.total = self.oritotal
-            self.drawn = []
-            return print("Restarted/Set to original")
+            self.reset()
+            self.draw()
+            return self.drawn
+            
         else:
             r = random.randint(0,self.total-1)
             ball = self.contents[r]
             self.contents.pop(r)
             self.total-=1
             self.drawn.append(ball)
+            if to_draw > 1:
+                self.draw()
             return self.drawn
+        
+    def reset(self):
+        self.contents = list(self.original)
+        self.total = self.oritotal
         
 
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    m = num_balls_drawn
     n = int(num_experiments) #copy
+
     success = 0
+    successes = 0
 
     while num_experiments > 0:
         num_experiments -= 1
-        problist = list()
-        drawpile = list()
-        for i in range(0,m):
+        hat.drawn = []
+        for i in range(0,num_balls_drawn):
             hat.draw()
-        print(hat.drawn)
         d = Counter(hat.drawn)
+
         for key in expected_balls:
+
             if d[key] >= expected_balls[key]:
-                print("Matches prob")
+                success = 1
             else:
-                print("No Match")
+                success = 0
                 break
-            success += 1
-                
-            
+        
+
+        if success == 1:
+            successes += 1
+
+        hat.reset()
+
+    prob = successes/n
+    return prob
 
 
-    
-    probability = success/n
-    return probability
+hat3 = Hat(blue=3,red=2,green=6)
+probability = experiment(hat=hat3, expected_balls={"blue":2,"green":1}, num_balls_drawn=4, num_experiments=1000)
+print(probability) #0.272 expected
 
-hat1 = Hat(yellow=1,dfdas=1)
+hat = Hat(yellow=5,red=1,green=3,blue=9,test=1)
+probability=experiment(hat=hat, expected_balls={"yellow":2,"blue":3,"test":1}, num_balls_drawn=20, num_experiments=100)
+print(probability) #1.0 expected
