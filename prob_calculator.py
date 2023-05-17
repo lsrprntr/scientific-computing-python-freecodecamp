@@ -59,7 +59,8 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     prob = successes/n
     return prob
 
-
+'''
+TESTS
 hat3 = Hat(blue=3,red=2,green=6)
 probability = experiment(hat=hat3, expected_balls={"blue":2,"green":1}, num_balls_drawn=4, num_experiments=1000)
 print(probability) #0.272 expected
@@ -67,3 +68,4 @@ print(probability) #0.272 expected
 hat = Hat(yellow=5,red=1,green=3,blue=9,test=1)
 probability=experiment(hat=hat, expected_balls={"yellow":2,"blue":3,"test":1}, num_balls_drawn=20, num_experiments=100)
 print(probability) #1.0 expected
+'''
